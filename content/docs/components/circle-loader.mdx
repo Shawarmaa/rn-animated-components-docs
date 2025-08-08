@@ -1,0 +1,86 @@
+---
+title: CircleLoader
+description: A circular animated loader built with React Native Skia and Reanimated
+---
+
+<video src="/videos/circle-loader.mp4" autoPlay loop muted width="400" height="801" style={{maxHeight: "600px", height: "auto", margin: "0px 0", display: "block"}} />
+
+## Features
+
+- Smooth circular motion with easing  
+- Customizable radius, ball size, and colors  
+- Built with performance in mind using Skia and Reanimated
+- Fully self-contained and copy-paste ready  
+
+## Dependencies
+
+This component requires React Native Reanimated and Skia:
+
+```bash npm2yarn
+npx expo install react-native-reanimated @shopify/react-native-skia
+```
+
+## Usage
+
+This component is **self-contained** and can be used by simply copying the file.
+
+### Steps
+
+1. **Copy and paste** the `CircleLoader.tsx` file into your project  
+2. **Use it inside your component**:
+
+   ```tsx
+   export default function CircleLoaderExample() {
+     const [play, setPlay] = useState(false)
+   
+     return (
+       <View style={styles.container}>
+         <Pressable onPress={()=> setPlay(p => !p)} style={{marginBottom: 32}}>
+           <Text style={styles.playText}>
+             {play ? "Reset" : "Play"}
+           </Text>
+         </Pressable>
+         <CircleLoader
+           radius={80}
+           circleR={4}
+           colors={["#EF5A57", "#F5AF00", "#4BAA4E","#EF5A57", "#F5AF00", "#4BAA4E"]}
+           isPlaying={play}
+         />
+       </View>
+     )
+   }
+   ```
+
+## Props
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    radius: {
+      description: 'Radius of the outer circle',
+      type: 'number',
+      default: '120',
+    },
+    circleR: {
+      description: 'Radius of each individual circle',
+      type: 'number',
+      default: '10',
+    },
+    colors: {
+      description: 'Color array used for animation',
+      type: 'string[]',
+      default: '["#EF5A57", "#F5AF00", "#4BAA4E"]',
+    },
+    isPlaying: {
+      description: 'Boolean to control animation state',
+      type: 'boolean',
+      required: true,
+      default: 'false',
+    },
+  }}
+/>
+
+---
+
+Made with love by **niche.guys**
