@@ -1,0 +1,198 @@
+---
+title: AnimatedNumber
+description: An animated number display with smooth transitions for both digits and separators
+---
+
+<video src="/videos/animated-number.mp4" autoPlay loop muted width="400" height="474" style={{maxHeight: "600px", height: "auto", margin: "0px 0", display: "block"}} />
+
+## Features
+
+- Smoothly animates number updates with layout transitions
+- Animated comma or dot separators between every 3 digits
+- Supports two animation strategies: "translate" and "swap"
+- Supports customizable animation configs: "timing" and "spring"
+
+## Dependencies
+
+This component requires React Native Reanimated:
+
+```bash npm2yarn
+npx expo install react-native-reanimated
+```
+
+## Usage
+
+This component is self-contained and can be used by simply copying the file.
+
+### Steps
+
+1. Copy and paste the AnimatedNumber.tsx file into your project
+2. Use it inside your component:
+
+   ```tsx
+   import AnimatedNumber from "./AnimatedNumber"
+   import { TextInput, View } from "react-native"
+   import { useRef, useState } from "react"
+
+   export default function App() {
+     const [number, setNumber] = useState("")
+     const inputRef = useRef(null)
+
+     return (
+       <View style={styles.container}>
+         <AnimatedNumber
+           number={number}
+           textStyle={styles.text}
+           containerStyle={{ width: "100%", justifyContent: "center" }}
+           separatorAnimation="swap"
+           separator="comma"
+           animationConfig={{
+             type: "spring",
+             damping: 20,
+             stiffness: 120
+           }}
+         />
+         <TextInput
+           ref={inputRef}
+           autoFocus
+           style={{ width: "100%", height: 0, backgroundColor: "transparent", position: "absolute", bottom: 0 }}
+           onChangeText={setNumber}
+           keyboardType="numeric"
+         />
+       </View>
+     )
+   }
+   ```
+
+## Props
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    number: {
+      description: 'The numeric string to display',
+      type: 'string',
+      required: true,
+    },
+    separator: {
+      description: 'Separator type',
+      type: '"comma" | "dot"',
+      default: '"comma"',
+    },
+    separatorAnimation: {
+      description: 'Animation behavior for separators',
+      type: '"swap" | "translate"',
+      default: '"swap"',
+    },
+    textStyle: {
+      description: 'Custom style for each character digits and separators',
+      type: 'TextStyle',
+    },
+    containerStyle: {
+      description: 'Custom style for outer wrapper',
+      type: 'ViewStyle',
+    },
+    animationConfig: {
+      description: 'Config for animation',
+      type: 'AnimationConfigs',
+      default: '{ type: "timing", duration: 300 }',
+    },
+    prefix: {
+      description: 'Static text added before the number',
+      type: 'string',
+    },
+    suffix: {
+      description: 'Static text added after the number',
+      type: 'string',
+    },
+  }}
+/>
+
+---
+
+## AnimationConfig
+
+AnimationConfig can be one of two types. The `type` field determines which fields are applicable.
+
+### TimingOptions
+
+<TypeTable
+  type={{
+    type: {
+      description: 'When this type is selected, the fields below are used',
+      type: '"timing"',
+      required: true,
+    },
+    duration: {
+      description: 'Duration in ms',
+      type: 'number',
+      default: '300',
+    },
+    easing: {
+      description: 'Easing function',
+      type: 'EasingFunction',
+    },
+  }}
+/>
+
+### SpringOptions
+
+<TypeTable
+  type={{
+    type: {
+      description: 'When this type is selected, the fields below are used',
+      type: '"spring"',
+      required: true,
+    },
+    damping: {
+      description: 'Higher value reduces bounce',
+      type: 'number',
+      default: '20',
+    },
+    mass: {
+      description: 'Larger mass slows down the animation',
+      type: 'number',
+      default: '1',
+    },
+    stiffness: {
+      description: 'Higher value makes the animation faster',
+      type: 'number',
+      default: '100',
+    },
+    overshootClamp: {
+      description: 'If true, prevents overshooting the target',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>
+
+<Callout>
+For `"timing"` type, duration is exact. For `"spring"` type, duration is physics-based.  
+If you need exact sync with other animations, use `"timing"` or calculate an approximate spring duration.
+</Callout>
+
+### Examples
+
+```tsx
+// timing
+animationConfig={{
+  type: "timing",
+  duration: 400,
+  easing: Easing.out(Easing.exp)
+}}
+
+// spring
+animationConfig={{
+  type: "spring",
+  damping: 20,
+  stiffness: 120,
+  overshootClamp: false
+}}
+```
+
+---
+
+Made with love by **niche.guys**  
+Let the numbers flow beautifully.
