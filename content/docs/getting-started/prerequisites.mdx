@@ -1,0 +1,57 @@
+---
+title: Prerequisites
+description: What you need before using RN Animated Components
+---
+
+## React Native Environment
+
+- **React Native** 0.70 or higher
+- **Expo SDK** 48 or higher (if using Expo)
+- **TypeScript** support (recommended)
+
+## Dependencies
+
+Install dependencies based on which components you'll use:
+
+### All Components Need
+```bash npm2yarn
+npx expo install react-native-reanimated
+```
+
+### Most Components Need
+```bash npm2yarn
+npx expo install @shopify/react-native-skia
+```
+
+### ScratchCard Also Needs
+```bash npm2yarn
+npx expo install react-native-gesture-handler
+```
+
+### Install All Dependencies
+```bash npm2yarn
+npx expo install react-native-reanimated @shopify/react-native-skia react-native-gesture-handler
+```
+
+<Callout type="info">
+Each component page shows exactly which dependencies it needs.
+</Callout>
+
+## Development Environment
+
+- **Node.js** 16 or higher
+- **iOS Simulator** or physical device for iOS development
+- **Android Studio** and emulator for Android development
+
+## TypeScript Support
+
+All components include full TypeScript definitions. For the best experience:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-native"
+  }
+}
+```

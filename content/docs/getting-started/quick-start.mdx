@@ -1,0 +1,116 @@
+---
+title: Quick Start
+description: Get up and running with RN Animated Components in minutes
+---
+
+## Step 1: Install Dependencies
+
+Install React Native Reanimated (required by all components):
+
+```bash npm2yarn
+npx expo install react-native-reanimated
+```
+
+## Step 2: Choose a Component
+
+Let's start with the **AnimatedNumber** component - it's simple and doesn't require Skia:
+
+1. Visit the [AnimatedNumber documentation](/docs/components/animated-number)
+2. Copy the `AnimatedNumber.tsx` file to your project
+3. Save it as `components/AnimatedNumber.tsx`
+
+## Step 3: Use the Component
+
+Create a simple example:
+
+```tsx title="App.tsx"
+import React, { useState } from 'react';
+import { View, TextInput, StyleSheet } from 'react-native';
+import AnimatedNumber from './components/AnimatedNumber';
+
+export default function App() {
+  const [number, setNumber] = useState('1234');
+
+  return (
+    <View style={styles.container}>
+      <AnimatedNumber
+        number={number}
+        textStyle={styles.numberText}
+        containerStyle={styles.numberContainer}
+        separator="comma"
+        separatorAnimation="swap"
+        animationConfig={{
+          type: "spring",
+          damping: 20,
+          stiffness: 120
+        }}
+      />
+      
+      <TextInput
+        style={styles.input}
+        value={number}
+        onChangeText={setNumber}
+        placeholder="Enter a number"
+        keyboardType="numeric"
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  numberContainer: {
+    marginBottom: 40,
+  },
+  numberText: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    fontSize: 18,
+    backgroundColor: 'white',
+  },
+});
+```
+
+## Step 4: Run Your App
+
+```bash npm2yarn
+npx expo start
+```
+
+That's it! You now have a working animated number component. Type in the input field and watch the numbers animate smoothly.
+
+## What's Next?
+
+<Cards>
+  <Card href="/docs/components/animated-number" title="Explore AnimatedNumber">
+    Learn about all props and customization options
+  </Card>
+  <Card href="/docs/components/circle-loader" title="Try CircleLoader">
+    Add a beautiful loading animation to your app
+  </Card>
+  <Card href="/docs/components/liquid-switch" title="Add LiquidSwitch">
+    Create smooth toggle switches with liquid effects
+  </Card>
+  <Card href="/docs/components/scratch-card" title="Build ScratchCard">
+    Create interactive scratch-to-reveal experiences
+  </Card>
+</Cards>
+
+<Callout type="success">
+**Pro tip**: All components are designed to be copied directly into your project. No complex setup or npm packages required!
+</Callout>
