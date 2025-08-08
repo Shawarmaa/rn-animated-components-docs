@@ -1,0 +1,108 @@
+---
+title: ScratchCard
+description: A scratchable canvas component that reveals hidden content using gesture-based interaction
+---
+
+<video src="/videos/scratch-card.mp4" autoPlay loop muted width="400" height="801" style={{maxHeight: "600px", height: "auto", margin: "0px 0", display: "block"}} />
+
+## Features
+
+- Scratch-off effect using pan gesture  
+- Customizable overlay and behind content  
+- Supports dynamic layout size  
+- Self-contained and copy-paste friendly  
+
+## Dependencies
+
+This component requires React Native Reanimated, Skia, and Gesture Handler:
+
+```bash npm2yarn
+npx expo install react-native-reanimated react-native-gesture-handler @shopify/react-native-skia
+```
+
+## Usage
+
+This component is **self-contained** and can be used by simply copying the file.
+
+### Steps
+
+1. **Copy and paste** the `ScratchCard.tsx` file into your project  
+2. **Use it inside your component**:
+
+   ```tsx
+   import ScratchCard from "./ScratchCard"
+
+   export default function App() {
+     return (
+       <ScratchCard containerStyle={{ width: 300, height: 300 }}>
+         <ScratchCard.Behind>
+           {/* Content shown after scratching */}
+           <Image source={require("./gift.png")} style={{ width: 300, height: 300 }} />
+         </ScratchCard.Behind>
+         <ScratchCard.Overlay>
+           {/* Scratchable surface */}
+           <Rect
+             x={0}
+             y={0}
+             width={300}
+             height={300}
+             color="#ccc"
+           />
+         </ScratchCard.Overlay>
+       </ScratchCard>
+     )
+   }
+   ```
+
+## Props
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+### `ScratchCard` Props
+
+<TypeTable
+  type={{
+    children: {
+      description: 'Must include ScratchCard.Behind and ScratchCard.Overlay',
+      type: 'ReactNode',
+      required: true,
+    },
+    containerStyle: {
+      description: 'Optional custom container styling',
+      type: 'ViewStyle',
+      default: 'full screen dimensions',
+    },
+  }}
+/>
+
+### `ScratchCard.Overlay`
+
+Defines the top layer that the user scratches off. Can be any Skia element or function receiving layout size.
+
+<TypeTable
+  type={{
+    children: {
+      description: 'Render content over the scratch area',
+      type: 'ReactNode | (layout) => ReactNode',
+      required: true,
+    },
+  }}
+/>
+
+### `ScratchCard.Behind`
+
+Defines the hidden content revealed during scratching. Can be any RN element.
+
+<TypeTable
+  type={{
+    children: {
+      description: 'Visible only after scratching begins',
+      type: 'ReactNode',
+      required: true,
+    },
+  }}
+/>
+
+---
+
+Made with love by **niche.guys**
