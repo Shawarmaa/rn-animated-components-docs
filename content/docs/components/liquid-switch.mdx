@@ -1,0 +1,143 @@
+---
+title: LiquidSwitch
+description: A custom animated toggle switch with a liquid-like sliding effect and optional icon support
+---
+
+<video src="/videos/liquid-switch.mp4" autoPlay loop muted width="400" height="801" style={{maxHeight: "600px", height: "auto", margin: "0px 0", display: "block"}} />
+
+## Features
+
+- Smooth switch animation with a unique liquid effect  
+- Optional icons for both ON and OFF states  
+- Customizable track and thumb colors  
+- Responsive size scaling  
+- Fully self-contained, just copy & paste  
+
+## Dependencies
+
+This component requires React Native Reanimated and Skia:
+
+```bash npm2yarn
+npx expo install react-native-reanimated @shopify/react-native-skia
+```
+
+## Usage
+
+This component is **self-contained** and can be used by simply copying the file.
+
+### Steps
+
+1. **Copy and paste** the `LiquidSwitch.tsx` file into your project  
+2. **Use it inside your component**:
+
+   ```tsx
+   import LiquidSwitch from "./LiquidSwitch"
+
+   export default function App() {
+     return (
+       <LiquidSwitch
+         size={100}
+         onChange={(val) => console.log("Switched to", val)}
+         trackColors={{
+           true: "#00C853",
+           false: "#CFD8DC"
+         }}
+         images={{
+           true: {
+             source: require("./assets/check.png"),
+             width: 24,
+             height: 24,
+             color: "rgba(255,255,255,0.8)"
+           },
+           false: {
+             source: require("./assets/cross.png"),
+             width: 24,
+             height: 24,
+             color: "rgba(255,255,255,0.8)"
+           }
+         }}
+       />
+     )
+   }
+   ```
+
+## Props
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+<TypeTable
+  type={{
+    size: {
+      description: 'Height of the switch (width is auto-scaled)',
+      type: 'number',
+      default: '80',
+    },
+    onChange: {
+      description: 'Callback when the switch value changes',
+      type: 'function',
+      required: true,
+    },
+    containerStyle: {
+      description: 'Custom style for the outer container',
+      type: 'ViewStyle',
+    },
+    gap: {
+      description: 'Inner spacing between track and thumb',
+      type: 'number',
+      default: '4',
+    },
+    trackColors: {
+      description: 'Background colors for ON/OFF states',
+      type: 'object',
+      default: '{ true: "#1690F3", false: "#adb5bd" }',
+    },
+    thumbColor: {
+      description: 'Color of the thumb ball',
+      type: 'string',
+      default: '"white"',
+    },
+    images: {
+      description: 'Optional image icons for ON/OFF states',
+      type: 'object',
+    },
+    initialValue: {
+      description: 'Initial value of the switch',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>
+
+### `images.true` and `images.false` structure
+
+<TypeTable
+  type={{
+    source: {
+      description: 'Image asset or URI',
+      type: 'string | number',
+      required: true,
+    },
+    width: {
+      description: 'Width of the image',
+      type: 'number',
+      required: true,
+    },
+    height: {
+      description: 'Height of the image',
+      type: 'number',
+      required: true,
+    },
+    fit: {
+      description: 'One of "contain", "cover", "fill", etc.',
+      type: 'string',
+    },
+    color: {
+      description: 'Tint color applied using Skia ColorMatrix',
+      type: 'string (rgba)',
+    },
+  }}
+/>
+
+---
+
+Made with love by **niche.guys**
