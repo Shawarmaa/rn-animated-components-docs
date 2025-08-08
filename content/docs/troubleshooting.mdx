@@ -1,0 +1,223 @@
+---
+title: Troubleshooting
+description: Common issues and solutions for RN Animated Components
+---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+## Common Issues
+
+<Accordions type="single">
+
+<Accordion title="Component not animating or rendering blank">
+
+**Possible causes:**
+- Missing required dependencies
+- Incorrect React Native Reanimated setup
+- Skia not properly configured
+
+**Solutions:**
+
+1. **Check dependencies are installed:**
+   ```bash npm2yarn
+   npx expo install react-native-reanimated @shopify/react-native-skia react-native-gesture-handler
+   ```
+
+2. **For bare React Native projects**, ensure you've followed the platform setup:
+   - [Reanimated iOS/Android setup](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/)
+   - [Skia platform configuration](https://shopify.github.io/react-native-skia/docs/getting-started/installation)
+
+3. **Check your Metro bundler** is running and restart if needed:
+   ```bash
+   npx react-native start --reset-cache
+   ```
+
+</Accordion>
+
+<Accordion title="TypeScript errors with component props">
+
+**Possible causes:**
+- Missing TypeScript types for dependencies
+- Incorrect prop types being passed
+
+**Solutions:**
+
+1. **Install missing types:**
+   ```bash npm2yarn
+   npm install --save-dev @types/react @types/react-native
+   ```
+
+2. **Check prop types** in the component documentation to ensure you're passing the correct types
+
+3. **Use TypeScript strict mode** to catch type issues early:
+   ```json title="tsconfig.json"
+   {
+     "compilerOptions": {
+       "strict": true
+     }
+   }
+   ```
+
+</Accordion>
+
+<Accordion title="Performance issues or stuttering animations">
+
+**Possible causes:**
+- Running animations on JavaScript thread
+- Too many components animating simultaneously
+- Heavy operations during animations
+
+**Solutions:**
+
+1. **Ensure Reanimated is using the UI thread:**
+   - Make sure `react-native-reanimated` is properly installed
+   - Check that you're not logging values during animations (this forces JS thread)
+
+2. **Optimize heavy operations:**
+   - Avoid complex calculations during animations
+   - Use `useMemo` and `useCallback` for expensive operations
+   - Consider reducing the number of simultaneously animated elements
+
+3. **Profile your app:**
+   - Use React DevTools Profiler
+   - Enable performance monitoring in React Native
+
+</Accordion>
+
+<Accordion title="Skia components not displaying on Android">
+
+**Possible causes:**
+- Skia not properly configured for Android
+- Hermes engine compatibility issues
+
+**Solutions:**
+
+1. **Check Skia Android setup:**
+   ```json title="metro.config.js"
+   const { getDefaultConfig } = require('expo/metro-config');
+   const config = getDefaultConfig(__dirname);
+   
+   config.resolver.assetExts.push('ttf', 'otf', 'png');
+   
+   module.exports = config;
+   ```
+
+2. **Ensure Hermes is enabled** (if using React Native 0.70+):
+   ```json title="android/app/build.gradle"
+   project.ext.react = [
+     enableHermes: true
+   ]
+   ```
+
+3. **Clear Android build cache:**
+   ```bash
+   cd android && ./gradlew clean && cd ..
+   ```
+
+</Accordion>
+
+<Accordion title="Gestures not working in ScratchCard">
+
+**Possible causes:**
+- Gesture Handler not properly set up
+- Conflicting gesture handlers
+- View hierarchy issues
+
+**Solutions:**
+
+1. **Check Gesture Handler setup:**
+   ```bash npm2yarn
+   npx expo install react-native-gesture-handler
+   ```
+
+2. **Ensure proper wrapping** in your root component:
+   ```tsx title="App.tsx"
+   import { GestureHandlerRootView } from 'react-native-gesture-handler';
+   
+   export default function App() {
+     return (
+       <GestureHandlerRootView style={{ flex: 1 }}>
+         {/* Your app content */}
+       </GestureHandlerRootView>
+     );
+   }
+   ```
+
+3. **Check for conflicting gestures** like ScrollView or other pan handlers
+
+</Accordion>
+
+<Accordion title="Build errors with Expo">
+
+**Possible causes:**
+- Incompatible Expo SDK version
+- Missing Expo config for native dependencies
+
+**Solutions:**
+
+1. **Update to supported Expo SDK** (48+):
+   ```bash
+   npx expo install --fix
+   ```
+
+2. **Add required plugins** to your `app.json`:
+   ```json title="app.json"
+   {
+     "expo": {
+       "plugins": [
+         "react-native-reanimated/plugin"
+       ]
+     }
+   }
+   ```
+
+3. **Clear Expo cache:**
+   ```bash
+   npx expo start -c
+   ```
+
+</Accordion>
+
+</Accordions>
+
+## Debug Mode
+
+Enable debug mode to help troubleshoot issues:
+
+```tsx
+// Add to your component for debugging
+console.log('Component rendered with props:', props);
+
+// For Reanimated debugging
+import { runOnJS } from 'react-native-reanimated';
+
+// In your animated function
+runOnJS(() => console.log('Animation value:', value))();
+```
+
+<Callout type="warn">
+**Remember:** Remove console logs in production as they can cause performance issues with animations.
+</Callout>
+
+## Performance Tips
+
+1. **Use worklets** for heavy calculations in animations
+2. **Minimize state updates** during animations  
+3. **Profile your app** regularly to catch performance regressions
+4. **Test on physical devices**, especially lower-end ones
+
+## Getting Help
+
+If you're still experiencing issues:
+
+1. **Check the [FAQ](/docs/faq)** for common questions
+2. **Review component documentation** for specific usage examples
+3. **Search existing GitHub issues** for similar problems
+4. **Create a minimal reproduction** when reporting bugs
+
+## Useful Resources
+
+- [React Native Reanimated Documentation](https://docs.swmansion.com/react-native-reanimated/)
+- [React Native Skia Documentation](https://shopify.github.io/react-native-skia/)
+- [React Native Gesture Handler Documentation](https://docs.swmansion.com/react-native-gesture-handler/)
+- [Expo Documentation](https://docs.expo.dev/)

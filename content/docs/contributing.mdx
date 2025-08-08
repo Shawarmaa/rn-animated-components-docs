@@ -1,0 +1,83 @@
+---
+title: Contributing
+description: How to contribute to RN Animated Components
+---
+## Ways to Contribute
+
+**Report Bugs**
+- Search existing issues to avoid duplicates
+- Create a minimal reproduction
+- Include environment details (React Native version, platform, etc.)
+
+**Suggest Features** 
+- Check if already requested in GitHub issues
+- Describe the use case and value
+- Provide examples or mockups
+
+**Submit Code**
+- Fork the repository
+- Create a feature branch
+- Test thoroughly on both platforms
+- Submit a pull request
+
+## Development Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ogulcanbagatir/rn-animated-components.git
+   ```
+
+2. **Create test environment**
+   ```bash
+   npx create-expo-app test-app
+   cd test-app
+   npx expo install react-native-reanimated @shopify/react-native-skia react-native-gesture-handler
+   ```
+
+3. **Copy component for testing**
+   Copy the component you want to work on into your test app.
+
+## Component Guidelines
+
+**Code Style**
+- Use TypeScript with strict mode
+- Follow consistent naming (PascalCase for components, camelCase for props)
+- Add JSDoc comments for all props
+
+**Performance**
+- Use worklets for UI thread animations
+- Minimize state updates during animations
+- Test on physical devices
+
+**Documentation**
+Every component needs:
+- Clear description and video demo
+- Complete usage example
+- Props documentation with types
+- Dependency requirements
+
+## Testing Checklist
+
+- [ ] Works on iOS and Android
+- [ ] Smooth 60fps animations  
+- [ ] Props work as documented
+- [ ] TypeScript types correct
+- [ ] No memory leaks
+
+## Pull Request Process
+
+1. **Write clear commit messages**
+2. **Update documentation if needed**
+3. **Test on both platforms**
+4. **Include screenshots/videos**
+
+## Quality Standards
+
+New components should:
+- Solve real developer problems
+- Be performant (60fps)
+- Work on both platforms
+- Include comprehensive docs
+- Follow existing patterns
+
+Made with love by **niche.guys**

@@ -1,0 +1,118 @@
+---
+title: FAQ
+description: Frequently asked questions about RN Animated Components
+---
+
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+<Accordions type="single">
+
+<Accordion title="Do I need to install these as npm packages?">
+
+No! All components are **self-contained** and designed to be copied directly into your project. Simply copy the component file you want to use, install the required dependencies, and you're ready to go.
+
+This approach gives you full control over the code and makes it easy to customize the components to fit your needs.
+
+</Accordion>
+
+<Accordion title="Which React Native versions are supported?">
+
+The components work with:
+- **React Native** 0.70 or higher
+- **Expo SDK** 48 or higher
+- **React Native Reanimated** v3+
+
+We recommend using the latest stable versions for the best experience.
+
+</Accordion>
+
+<Accordion title="Can I use these components with bare React Native?">
+
+Yes! The components work with both Expo and bare React Native projects. However, you'll need to follow the platform-specific installation guides for the required dependencies:
+
+- [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/)
+- [React Native Skia](https://shopify.github.io/react-native-skia/docs/getting-started/installation)
+- [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/docs/installation)
+
+</Accordion>
+
+<Accordion title="Do all components require React Native Skia?">
+
+No, only some components require Skia:
+
+- **AnimatedNumber**: Only requires Reanimated ✅
+- **CircleLoader**: Requires Reanimated + Skia
+- **LiquidSwitch**: Requires Reanimated + Skia  
+- **ScratchCard**: Requires Reanimated + Skia + Gesture Handler
+
+If you want to avoid Skia, start with AnimatedNumber.
+
+</Accordion>
+
+<Accordion title="Can I customize the animations?">
+
+Absolutely! Each component is designed to be customizable:
+
+- **AnimatedNumber**: Supports both timing and spring animations with full config options
+- **CircleLoader**: Customize colors, sizes, and timing
+- **LiquidSwitch**: Customize colors, sizes, and add custom icons
+- **ScratchCard**: Customize overlay and reveal content
+
+Since you have the full source code, you can modify any aspect of the animations.
+
+</Accordion>
+
+<Accordion title="Are the components TypeScript ready?">
+
+Yes! All components are written in TypeScript with full type definitions. You'll get:
+
+- Complete IntelliSense support
+- Type checking for all props
+- Proper type inference
+- JSDoc documentation for all properties
+
+</Accordion>
+
+<Accordion title="How do I add custom styling?">
+
+Most components accept style props like `containerStyle`, `textStyle`, etc. You can also:
+
+1. **Modify the component directly** since you have the source code
+2. **Wrap the component** in your own styled container
+3. **Use the provided style props** for common customizations
+
+</Accordion>
+
+<Accordion title="Can I use these in production apps?">
+
+Yes! These components are production-ready and built with performance in mind:
+
+- Uses **Reanimated** for 60fps animations on the UI thread
+- **Skia** provides hardware-accelerated graphics
+- Minimal dependencies and optimized rendering
+- Tested across different devices and screen sizes
+
+</Accordion>
+
+<Accordion title="What if I find a bug or want to contribute?">
+
+Since these are copy-paste components, you can:
+
+1. **Fix bugs directly** in your copied version
+2. **Report issues** on the GitHub repository
+3. **Share improvements** back to the community
+4. **Create pull requests** with enhancements
+
+See our [Contributing Guide](/docs/contributing) for more details.
+
+</Accordion>
+
+</Accordions>
+
+## Still have questions?
+
+If your question isn't answered here, you can:
+
+- Check the [Troubleshooting Guide](/docs/troubleshooting)
+- Open an issue on [GitHub](https://github.com/ogulcanbagatir/rn-animated-components)
+- Review the component-specific documentation for detailed usage examples
